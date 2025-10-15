@@ -62,21 +62,25 @@ df = pd.DataFrame({
     "Cena": [85000, 120000, 75000, 200000, 99000, 160000]}, index=["A", "B", "C", "D", "E", "F"])
 
 # NALOGA 1: Izpiši vse cene
-
+print(df["Cena"])
 # NALOGA 2: Izpiši podatke o stanovanju E
-
+print(df.loc["E"])
 # NALOGA 3: Spremeni ceno stanovanja A na 90000
-
+df.loc["A", "Cena"] = 90000
 # NALOGA 4: Dodaj novo stanovanje H s podatki [80, 3, 2.5, True, "Daljinsko", 210000]
-
+df.loc["H"] = [80, 3, 2.5, True, "Daljinsko", 210000]
 # NALOGA 5: Izpiši vsa stanovanja, kjer je cena na m2 večja od 3000
-
+print(df[df["Cena"]/df["Kvadratura"] > 3000])
 # NALOGA 6: Izpiši stanovanja, ki imajo manj kot 3 sobe ALI so prenovljena
-
+print(df[(df["Sobe"]<3) | (df["Prenovljeno"] == True)])
 # NALOGA 7: Uredi DataFrame po stolpcu Cena padajoče
-
+df.sort_values(by=["Cena"], inplace=True, ascending=False)
+print(df)
 # NALOGA 8: Preštej, koliko stanovanj ima posamezno število sob
-
+print(df["Sobe"].value_counts())
 # NALOGA 9: Ustvari nov DataFrame samo s stolpci Kvadratura, Sobe in Cena
-
+df1 = df[["Kvadratura", "Sobe", "Cena"]]
+print(df1)
 # NALOGA 10: Ustvari nov DataFrame brez stanovanja D in resetiraj indeks
+df2 = df.drop("D").reset_index()
+print(df2)
