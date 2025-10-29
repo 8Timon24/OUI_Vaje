@@ -76,10 +76,25 @@ acc2 = evaluate(tree2, test_bin, target)
 print("Drevo – binarizirani atributi", acc2)
 
 # --- 3. Drevo: originalni atributi (prepruning, max_depth=5) ---
-
+tree3 = DecisionTree(max_depth=5, verbose_level=0)
+tree3.fit(train_data, target, attributes)
+acc3 = evaluate(tree3, test_data, target)
+print("OG drevo s preprunningom", acc3)
 # --- 4. Drevo: binarizirani atributi (prepruning, max_depth=5) ---
-
+tree4 = DecisionTree(max_depth=5, verbose_level=0)
+tree4.fit(train_bin, target, [c for c in train_bin.columns if c != target])
+acc4 = evaluate(tree4, test_bin, target)
+print("Drevo z binariziranimi atributi in prepruningom", acc4)
 # --- 5. Drevo: originalni atributi (REP pruning) ---
-
+tree5 = DecisionTree(verbose_level=0)
+tree5.fit(train_data, target, attributes)
+rep_pruning(tree5, prune_part, target, verbose_level=1)
+acc5 = evaluate(tree5, test_data, target)
+print("Drevo z rep pruningom", acc5)
 # --- 6. Drevo: binarizirani atributi (REP pruning) ---
+tree6 = DecisionTree(verbose_level=0)
+tree6.fit(train_bin, target, [c for c in train_bin.columns if c != target])
+rep_pruning(tree6, prune_part_bin, target, verbose_level=1)
+acc6 = evaluate(tree6, test_bin, target)
+print("Binarizirani atributi in rep pruning", acc6)
 
